@@ -70,6 +70,11 @@ h2{font-size:22px;font-weight:400;margin:0 0 14px;text-align:center;line-height:
 .lock p{filter:blur(5px);margin:0;user-select:none}
 .lock em{position:absolute;inset:0;display:grid;place-items:center;font:800 13px Montserrat,sans-serif;font-style:normal;color:var(--y)}
 .gift{font-size:12.5px;color:var(--mut);text-align:center;margin-top:12px}
+.giftbox{margin-top:12px;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,rgba(255,213,0,.10),rgba(255,255,255,.05));text-align:center;backdrop-filter:blur(6px)}
+.giftbox .gift-title{font:800 11px Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--y);margin-bottom:6px}
+.giftbox .gift-name{font-size:16px;line-height:1.35;color:var(--tx);margin-bottom:3px}
+.giftbox .gift-sub{font-size:13px;color:var(--mut)}
+.tg-note{font-size:11.5px;color:var(--mut);text-align:center;margin-top:9px;line-height:1.35}
 .sign-big{text-align:center;font-size:48px;line-height:1;color:var(--y);text-shadow:0 0 22px rgba(255,213,0,.7)}
 </style>
 </head>
@@ -130,16 +135,22 @@ function signs(){mood('happy');speak('Выбери свой знак зодиа�
 function ask(n){const q=Q[n];mood('happy');speak(q.say);show('<h2>'+q.t+'</h2><div class="opts">'+q.o.map(o=>`<button class="opt" data-k="${o[0]}">${o[1]}</button>`).join('')+'</div>');stage.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const k=b.dataset.k,r=R[q.id][k];S.a[q.id]=k;b.classList.add('on');stage.querySelectorAll('.opt').forEach(x=>x.onclick=null);mood(r[0]);speak(r[1]);if(r[0]==='sad'){sfx.sad();vib([60,60,60])}else if(r[0]==='joy'){sfx.ok();vib([30,40,30,40,60])}else{sfx.tap();vib(20)}addXP(15);setTimeout(()=>n<2?ask(n+1):calc(),r[0]==='sad'?2400:1700)})}
 function calc(){ch.classList.add('spin');mood('think');speak('Собираю твой прогноз… Сверяю звёзды с картой земли…');const st=['Читаю знак '+S.sign[2]+'…','Сверяю карту возможностей…','Подбираю стратегию…'];show(`<div class="load"><div class="orb"><span>${S.sign[1]}</span></div><h2 id="ls">${st[0]}</h2></div>`);sfx.tick();let i=0;const t=setInterval(()=>{i++;sfx.tick();vib(10);if(i<3)document.getElementById('ls').textContent=st[i];else{clearInterval(t);ch.classList.remove('spin');addXP(25);result()}},1300)}
 function result(){const g=TXT.goal[S.a.goal],p=TXT.prio[S.a.prio],st=TXT.style[S.a.style],s=S.sign;const late=S.a.style==='late';
-if(late){mood('sad');sfx.sad();speak('Не грусти: один маленький шаг, и ты уже в игре. Остальное жду в Telegram.');setTimeout(()=>{mood('happy');sfx.ok();vib([40,40,40])},2800)}else{mood('joy');sfx.ok();vib([30,40,30,40,80]);speak('Готово! Часть прогноза уже открыта, остальное — в Telegram вместе с подарком.')}
-const url='https://t.me/'+BOT+'?start='+[s[0],S.a.goal,S.a.prio,S.a.style,'ld'].join('_');
+if(late){mood('sad');sfx.sad();speak('Не грусти: один маленький шаг — и ты уже в игре. Полная расшифровка ждёт тебя в Telegram.');setTimeout(()=>{mood('happy');sfx.ok();vib([40,40,40])},2800)}else{mood('joy');sfx.ok();vib([30,40,30,40,80]);speak('Готово! Основной вектор уже определён. Полная расшифровка откроется в Telegram.')}
+const payload=['hz2027',s[0],S.a.goal,S.a.prio,S.a.style].join('_');
+const url='https://t.me/'+BOT+'?start='+encodeURIComponent(payload);
 show(`<div class="sign-big">${s[1]}</div><h2>Твой 2027: ${s[2]}</h2>
 <div class="card"><b>Главная тема:</b> ${s[3]}.</div>
 <div class="card"><b>💰 ${g[0]}.</b> ${g[1]}</div>
 <div class="card"><b>🚀 Работа и цели.</b> ${p}</div>
 <div class="card"><b>🧭 Стиль решений.</b> ${st}</div>
-<div class="card lock"><p><b>🧭 Главная возможность 2027 года.</b> Она связана с активом, о котором ты уже думаешь, и окно для неё открывается весной.</p><em>🔒 Откроется в Telegram</em></div>
-<a class="btn" id="tg" href="${url}" target="_blank" rel="noopener">Получить полный прогноз + подарок</a>
-<div class="gift">🎁 В подарок: чек-лист «Карта земельных возможностей: 7 способов работать с землёй»</div>`);
+<div class="card lock"><p><b>✨ Полная расшифровка прогноза.</b> Деньги и возможности, работа и реализация, отношения и личное пространство, точки риска и три главных действия на 2027 год.</p><em>🔒 Полный прогноз откроется в Telegram</em></div>
+<a class="btn" id="tg" href="${url}" target="_blank" rel="noopener">Получить полный прогноз в Telegram</a>
+<div class="giftbox">
+  <div class="gift-title">🎁 Подарок после перехода</div>
+  <div class="gift-name">«Карта земельных возможностей»</div>
+  <div class="gift-sub">7 способов работать с землёй</div>
+</div>
+<div class="tg-note">Полный прогноз и подарок откроются в Telegram</div>`);
 document.getElementById('tg').addEventListener('click',()=>{sfx.ok();vib(40)})}
 /* magic sky */
 const c=document.getElementById('sky'),x=c.getContext('2d');let W,H,st=[],sh=null;
