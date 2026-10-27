@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Гороскоп земли 2027</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap">
+<style>
+:root{--bg:#070b1a;--y:#FFD500;--g1:#fbe38a;--g2:#d99a1e;--tx:#f6efdc;--mut:#a3aac4;--card:rgba(255,255,255,.07);--line:rgba(255,213,0,.28);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(ellipse at 50% 0,#1d2152 0,var(--bg) 62%);color:var(--tx);font-family:Georgia,'Times New Roman',serif;overflow:hidden}
+.aurora{position:fixed;inset:-20%;z-index:0;pointer-events:none;background:radial-gradient(circle at 25% 30%,rgba(255,213,0,.16),transparent 38%),radial-gradient(circle at 78% 70%,rgba(120,90,255,.2),transparent 42%);animation:aur 14s ease-in-out infinite alternate}
+@keyframes aur{to{transform:translate(4%,-3%) rotate(6deg) scale(1.1)}}
+.topo{position:fixed;inset:0;z-index:0;opacity:.12;pointer-events:none;width:100%;height:100%}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#app{position:relative;z-index:1;height:100%;max-width:520px;margin:0 auto;display:flex;flex-direction:column;padding:12px 18px 18px}
+.brand{font:800 10px Montserrat,sans-serif;letter-spacing:.28em;text-transform:uppercase;line-height:1.3;color:var(--g1)}
+.brand b{display:block;font-size:13px;letter-spacing:.04em;color:var(--tx)}
+.hud{display:flex;align-items:center;gap:10px;font:700 12px Montserrat,sans-serif;margin-top:8px;color:var(--mut)}
+.bar{flex:1;height:8px;border-radius:8px;background:rgba(255,255,255,.1);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--g2),var(--y));box-shadow:0 0 12px var(--y);transition:width .6s}
+.lvl{white-space:nowrap;color:var(--y)}
+#snd{border:1px solid var(--line);background:var(--card);border-radius:50%;width:32px;height:32px;font-size:15px;cursor:pointer;color:var(--tx)}
+.hero{display:flex;align-items:flex-end;gap:8px;margin-top:8px;min-height:150px}
+#char{width:108px;flex:none;animation:float 3.4s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(255,213,0,.6))}
+@keyframes float{50%{transform:translateY(-9px)}}
+.eye{transform-origin:center;transform-box:fill-box;animation:blink 4s infinite}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+#sprout{transform-origin:50px 34px;transition:transform .5s;animation:sway 2.6s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(9deg)}}
+#char.spin #sprout{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#char.jump{animation:jump .6s}
+@keyframes jump{30%{transform:translateY(-28px) scale(1.07)}60%{transform:translateY(0) scale(.96)}}
+#char .joy,#char .sad,#char .thk{display:none}
+#char[data-mood=joy] .joy,#char[data-mood=sad] .sad,#char[data-mood=think] .thk{display:inline}
+#char[data-mood=joy] .eyes{display:none}
+#char[data-mood=sad] #sprout{animation:none;transform:rotate(-55deg)}
+#char[data-mood=sad]{animation:float 5s ease-in-out infinite;filter:grayscale(.5) brightness(.8) drop-shadow(0 0 12px rgba(120,140,255,.5))}
+#char[data-mood=joy]{animation:dance .7s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(255,213,0,.95))}
+@keyframes dance{25%{transform:rotate(-6deg) translateY(-8px)}75%{transform:rotate(6deg) translateY(-8px)}}
+.tear{animation:tear 1.6s infinite}
+@keyframes tear{from{transform:translateY(-4px);opacity:1}to{transform:translateY(14px);opacity:0}}
+.bubble{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px 18px 18px 4px;padding:12px 14px;font-size:15px;line-height:1.4;min-height:60px;margin-bottom:26px;flex:1;backdrop-filter:blur(8px);box-shadow:0 0 24px rgba(255,213,0,.1)}
+.name{font:800 10px Montserrat,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--y);margin-bottom:3px}
+#stage{flex:1;overflow-y:auto;padding:8px 2px;display:flex;flex-direction:column;justify-content:center}
+.scr{animation:in .6s both}
+@keyframes in{from{opacity:0;transform:translateY(18px) scale(.98);filter:blur(4px)}}
+h1{font-size:76px;font-weight:400;margin:0;text-align:center;letter-spacing:.06em;line-height:1;background:linear-gradient(180deg,#fff6c9,var(--y) 55%,var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px rgba(255,213,0,.45))}
+h2{font-size:22px;font-weight:400;margin:0 0 14px;text-align:center;line-height:1.3}
+.sub{text-align:center;color:var(--mut);margin:10px 0 22px;font-size:15px}
+.btn{display:block;width:100%;border:0;border-radius:16px;padding:17px;font:800 15px Montserrat,sans-serif;color:#2a1b00;background:linear-gradient(135deg,#ffe95c,var(--y),var(--g2));box-shadow:0 0 28px rgba(255,213,0,.4);cursor:pointer;text-align:center;text-decoration:none;text-transform:uppercase;letter-spacing:.03em;animation:pulse 2.2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 46px rgba(255,213,0,.7)}}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tile,.opt{background:var(--card);border:1px solid var(--line);color:var(--tx);border-radius:16px;cursor:pointer;font-family:inherit;transition:.25s;backdrop-filter:blur(4px)}
+.tile{padding:12px 4px;font-size:13px}
+.tile b{display:block;font-size:30px;color:var(--y);font-weight:400;text-shadow:0 0 12px rgba(255,213,0,.6)}
+.tile:hover,.opt:hover,.tile.on,.opt.on{background:rgba(255,213,0,.2);border-color:var(--y);transform:scale(1.04);box-shadow:0 0 22px rgba(255,213,0,.35)}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{padding:14px 16px;font-size:16px;text-align:left}
+.load{text-align:center}
+.orb{width:120px;height:120px;margin:10px auto 18px;border-radius:50%;border:2px dashed var(--y);display:grid;place-items:center;font-size:48px;color:var(--y);box-shadow:0 0 40px rgba(255,213,0,.4),inset 0 0 30px rgba(255,213,0,.2);animation:rot 6s linear infinite}
+.orb span{animation:rot 6s linear infinite reverse;text-shadow:0 0 16px var(--y)}
+@keyframes rot{to{transform:rotate(360deg)}}
+.card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--y);border-radius:16px;padding:12px 14px;margin-bottom:10px;font-size:14.5px;line-height:1.5;backdrop-filter:blur(6px);animation:in .6s both}
+.card b{color:var(--y)}
+.card:nth-child(3){animation-delay:.15s}.card:nth-child(4){animation-delay:.3s}.card:nth-child(5){animation-delay:.45s}.card:nth-child(6){animation-delay:.6s}
+.lock{position:relative;overflow:hidden}
+.lock p{filter:blur(5px);margin:0;user-select:none}
+.lock em{position:absolute;inset:0;display:grid;place-items:center;font:800 13px Montserrat,sans-serif;font-style:normal;color:var(--y)}
+.gift{font-size:12.5px;color:var(--mut);text-align:center;margin-top:12px}
+.sign-big{text-align:center;font-size:48px;line-height:1;color:var(--y);text-shadow:0 0 22px rgba(255,213,0,.7)}
+</style>
+</head>
+<body>
+<div class="aurora"></div>
+<svg class="topo" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#FFD500" stroke-width="1"><path d="M-20 120C80 60 160 180 260 110S380 60 430 100"/><path d="M-20 160C80 110 160 220 260 150S380 110 430 140"/><path d="M-20 200C90 160 170 260 260 190S370 160 430 180"/><path d="M-20 560C70 500 170 620 260 550S380 500 430 540"/><path d="M-20 600C70 550 170 660 260 590S380 550 430 580"/><path d="M-20 640C80 600 170 700 260 630S370 600 430 620"/></g></svg>
+<canvas id="sky"></canvas>
+<div id="app">
+  <div class="brand">Академия<b>ЗЕМЕЛЬНЫХ ИНВЕСТОРОВ</b></div>
+  <div class="hud"><span class="lvl" id="lvl">Уровень 1</span><div class="bar"><i id="xp"></i></div><span id="xpt">0 XP</span><button id="snd" aria-label="Звук">🔊</button></div>
+  <div class="hero">
+    <svg id="char" viewBox="0 0 100 110" data-mood="happy" aria-hidden="true">
+      <defs><radialGradient id="bg" cx="50%" cy="35%"><stop offset="0" stop-color="#fff6c0"/><stop offset="1" stop-color="#e8a912"/></radialGradient></defs>
+      <g id="sprout"><path d="M50 36 C50 22 52 14 56 8" stroke="#4fa85a" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M56 10 C66 2 76 8 72 18 C64 20 58 16 56 10Z" fill="#6fd17a"/><path d="M52 20 C44 12 34 16 36 24 C42 26 49 24 52 20Z" fill="#4fa85a"/></g>
+      <ellipse cx="50" cy="68" rx="34" ry="32" fill="url(#bg)"/>
+      <g class="eyes"><ellipse cx="38" cy="63" rx="4.6" ry="6.2" fill="#1d1d1b" class="eye"/><ellipse cx="62" cy="63" rx="4.6" ry="6.2" fill="#1d1d1b" class="eye"/><circle cx="40" cy="61" r="1.7" fill="#fff"/><circle cx="64" cy="61" r="1.7" fill="#fff"/></g>
+      <g class="joy"><path d="M32 64 Q38 55 44 64M56 64 Q62 55 68 64" stroke="#1d1d1b" stroke-width="3" fill="none" stroke-linecap="round"/><text x="8" y="30" font-size="14">✨</text><text x="78" y="36" font-size="14">✨</text></g>
+      <g class="sad"><path d="M31 54 L44 58M69 54 L56 58" stroke="#1d1d1b" stroke-width="2.5" stroke-linecap="round"/><ellipse class="tear" cx="33" cy="74" rx="2.6" ry="4" fill="#5bb8ff"/></g>
+      <g class="thk"><text x="70" y="40" font-size="14">💭</text></g>
+      <circle cx="29" cy="76" r="5" fill="#ff8f6b" opacity=".5"/><circle cx="71" cy="76" r="5" fill="#ff8f6b" opacity=".5"/>
+      <path id="mouth" d="M43 78 Q50 85 57 78" stroke="#1d1d1b" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="36" cy="100" rx="9" ry="5" fill="#a8741f"/><ellipse cx="64" cy="100" rx="9" ry="5" fill="#a8741f"/>
+    </svg>
+    <div class="bubble"><span class="name">Терра · хранитель земли</span><br><span id="say"></span></div>
+  </div>
+  <div id="stage"></div>
+</div>
+
+<script>
+const BOT='baza_by_land_bot';
+const SIGNS=[['aries','♈','Овен','стремительный старт и смелые ставки'],['taurus','♉','Телец','материальная опора и сильные активы'],['gemini','♊','Близнецы','новые связи и несколько источников дохода'],['cancer','♋','Рак','дом, безопасность и «своя территория»'],['leo','♌','Лев','заметность, лидерство и крупные решения'],['virgo','♍','Дева','порядок в цифрах и точные шаги'],['libra','♎','Весы','выгодные союзы и взвешенные сделки'],['scorpio','♏','Скорпион','трансформация и скрытые возможности'],['sagittarius','♐','Стрелец','расширение горизонтов и новые территории'],['capricorn','♑','Козерог','долгая игра и фундамент на годы'],['aquarius','♒','Водолей','нестандартные решения и свежие идеи'],['pisces','♓','Рыбы','финансовая устойчивость и ясность вместо распыления']];
+const Q=[
+ {id:'goal',t:'Что ты больше всего хочешь изменить в следующем году?',say:'Первый вопрос — самый важный. Отвечай сердцем!',o:[['money','💰 Деньги'],['home','🏡 Дом и семья'],['real','🚀 Реализация'],['life','🌿 Качество жизни'],['change','🔄 Хочу перемен']]},
+ {id:'prio',t:'Что для тебя сейчас важнее?',say:'Отлично! Ещё чуть-чуть, и прогноз почти готов.',o:[['income','Увеличить доход'],['source','Создать доп. источник денег'],['asset','Приобрести серьёзный актив'],['project','Начать новый проект'],['stable','Создать больше стабильности']]},
+ {id:'style',t:'Как ты обычно принимаешь большие решения?',say:'Последний вопрос. Дальше — магия!',o:[['fast','⚡ Быстро'],['calc','📊 Сначала считаю'],['look','👀 Долго присматриваюсь'],['ask','🤝 Советуюсь'],['late','😅 Откладываю']]}];
+const R={goal:{money:['joy','Деньги — отличная цель! Земля любит тех, кто считает.'],home:['happy','Дом — это сила. Я ведь хранитель земли!'],real:['happy','Реализация! Люблю, когда идеи выходят на участок.'],life:['happy','Качество жизни — мудрый выбор.'],change:['happy','Перемены — моё любимое. Поехали!']},
+ prio:{income:['happy','Рост дохода — принято!'],source:['happy','Второй источник — это умно.'],asset:['joy','Актив! Это моя любимая тема, ура-а-а!'],project:['joy','Новый проект — звучит смело!'],stable:['happy','Стабильность — прочный фундамент.']},
+ style:{fast:['happy','Быстро — это энергия!'],calc:['happy','Считаешь — значит, уважаешь деньги.'],look:['happy','Присматриваешься — тоже стратегия.'],ask:['happy','Советоваться — мудро.'],late:['sad','Ох… откладывание. Знаю, как оно тянет назад. Но мы это исправим…']}};
+const TXT={
+ goal:{money:['Деньги','Год сильного денежного роста, если направить ресурсы в одно русло, а не в десять.'],home:['Дом и семья','Тема года — «своё место»: пространство, где тебе спокойно и которое растёт в цене.'],real:['Реализация','Хороший год, чтобы перестать откладывать и показать свою идею миру.'],life:['Качество жизни','Выигрывает тот, кто выбирает время и свободу, а не просто «ещё больше работы».'],change:['Перемены','Старые схемы перестанут работать. Это не потеря, это освобождённое место.']},
+ prio:{income:'Рост дохода придёт через усиление того, что уже получается.',source:'Второй источник дохода лучше строить на понятном активе, а не на модной идее.',asset:'Актив — твой ключ года. Ищи тот, что работает на тебя без постоянного участия.',project:'Новый проект стартует легче, если сначала проверить его на маленьком шаге.',stable:'Стабильность создаётся не рывком, а тремя спокойными решениями подряд.'},
+ style:{fast:'Скорость — твой плюс. Добавь один «стоп-вопрос» перед важной сделкой.',calc:'Твоя сила в расчёте. Не застрянь в таблицах: 80% данных уже достаточно.',look:'Ты видишь больше других. Назначь дату решения, чтобы возможность не ушла.',ask:'Выбери одного-двух людей, которые реально в теме, и не собирай десять мнений.',late:'Откладывание — главный враг года. Сделай первый шаг сегодня, пусть самый маленький.'}};
+const MOUTH={happy:'M43 78 Q50 85 57 78',joy:'M38 74 Q50 92 62 74 Z',sad:'M43 83 Q50 74 57 83',think:'M44 80 L56 80'};
+const S={sign:null,a:{},xp:0};
+const stage=document.getElementById('stage'),say=document.getElementById('say'),ch=document.getElementById('char'),mouth=document.getElementById('mouth');
+let tw,AC,sound=true;
+/* sound + vibration */
+function tone(f,d=.12,t=0,type='sine',v=.07){if(!sound)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;o.connect(g);g.connect(AC.destination);const s=AC.currentTime+t;g.gain.setValueAtTime(v,s);g.gain.exponentialRampToValueAtTime(.0001,s+d);o.start(s);o.stop(s+d)}catch(e){}}
+const sfx={tap:()=>tone(660,.08),ok:()=>[523,659,784,1047].forEach((f,i)=>tone(f,.16,i*.09)),sad:()=>[392,330,262].forEach((f,i)=>tone(f,.28,i*.2,'triangle')),tick:()=>tone(880,.05,0,'square',.03)};
+function vib(p){try{if(sound&&navigator.vibrate)navigator.vibrate(p)}catch(e){}}
+document.getElementById('snd').onclick=e=>{sound=!sound;e.target.textContent=sound?'🔊':'🔇'};
+function mood(m){ch.dataset.mood=m;mouth.setAttribute('d',MOUTH[m]);mouth.setAttribute('fill',m==='joy'?'#c0392b':'none')}
+function speak(t){clearInterval(tw);say.textContent='';let i=0;tw=setInterval(()=>{say.textContent=t.slice(0,++i);if(i>=t.length)clearInterval(tw)},22)}
+function addXP(n){S.xp+=n;document.getElementById('xp').style.width=Math.min(100,S.xp/1.2)+'%';document.getElementById('xpt').textContent=S.xp+' XP';document.getElementById('lvl').textContent='Уровень '+(S.xp>=80?4:S.xp>=50?3:S.xp>=20?2:1);ch.classList.remove('jump');void ch.offsetWidth;ch.classList.add('jump')}
+function show(h){stage.innerHTML='<div class="scr">'+h+'</div>';stage.scrollTop=0}
+function intro(){mood('happy');speak('Привет! Я Терра, хранитель земли. Пройдём короткую игру, и я соберу твой личный прогноз на 2027 год.');show('<h1><span>2027</span></h1><p class="sub">Что приготовил этот год именно для тебя?</p><button class="btn" id="go">Начать игру</button>');document.getElementById('go').onclick=()=>{sfx.tap();vib(15);addXP(10);signs()}}
+function signs(){mood('happy');speak('Выбери свой знак зодиака. Я чувствую, как земля уже откликается!');show('<h2>Выбери свой знак</h2><div class="grid">'+SIGNS.map((s,i)=>`<button class="tile" data-i="${i}"><b>${s[1]}</b>${s[2]}</button>`).join('')+'</div>');stage.querySelectorAll('.tile').forEach(b=>b.onclick=()=>{S.sign=SIGNS[b.dataset.i];b.classList.add('on');sfx.ok();vib(25);mood('joy');speak(S.sign[2]+'! Отличный знак для земли!');addXP(20);setTimeout(()=>ask(0),1300)})}
+function ask(n){const q=Q[n];mood('happy');speak(q.say);show('<h2>'+q.t+'</h2><div class="opts">'+q.o.map(o=>`<button class="opt" data-k="${o[0]}">${o[1]}</button>`).join('')+'</div>');stage.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const k=b.dataset.k,r=R[q.id][k];S.a[q.id]=k;b.classList.add('on');stage.querySelectorAll('.opt').forEach(x=>x.onclick=null);mood(r[0]);speak(r[1]);if(r[0]==='sad'){sfx.sad();vib([60,60,60])}else if(r[0]==='joy'){sfx.ok();vib([30,40,30,40,60])}else{sfx.tap();vib(20)}addXP(15);setTimeout(()=>n<2?ask(n+1):calc(),r[0]==='sad'?2400:1700)})}
+function calc(){ch.classList.add('spin');mood('think');speak('Собираю твой прогноз… Сверяю звёзды с картой земли…');const st=['Читаю знак '+S.sign[2]+'…','Сверяю карту возможностей…','Подбираю стратегию…'];show(`<div class="load"><div class="orb"><span>${S.sign[1]}</span></div><h2 id="ls">${st[0]}</h2></div>`);sfx.tick();let i=0;const t=setInterval(()=>{i++;sfx.tick();vib(10);if(i<3)document.getElementById('ls').textContent=st[i];else{clearInterval(t);ch.classList.remove('spin');addXP(25);result()}},1300)}
+function result(){const g=TXT.goal[S.a.goal],p=TXT.prio[S.a.prio],st=TXT.style[S.a.style],s=S.sign;const late=S.a.style==='late';
+if(late){mood('sad');sfx.sad();speak('Не грусти: один маленький шаг, и ты уже в игре. Остальное жду в Telegram.');setTimeout(()=>{mood('happy');sfx.ok();vib([40,40,40])},2800)}else{mood('joy');sfx.ok();vib([30,40,30,40,80]);speak('Готово! Часть прогноза уже открыта, остальное — в Telegram вместе с подарком.')}
+const url='https://t.me/'+BOT+'?start='+[s[0],S.a.goal,S.a.prio,S.a.style,'ld'].join('_');
+show(`<div class="sign-big">${s[1]}</div><h2>Твой 2027: ${s[2]}</h2>
+<div class="card"><b>Главная тема:</b> ${s[3]}.</div>
+<div class="card"><b>💰 ${g[0]}.</b> ${g[1]}</div>
+<div class="card"><b>🚀 Работа и цели.</b> ${p}</div>
+<div class="card"><b>🧭 Стиль решений.</b> ${st}</div>
+<div class="card lock"><p><b>🧭 Главная возможность 2027 года.</b> Она связана с активом, о котором ты уже думаешь, и окно для неё открывается весной.</p><em>🔒 Откроется в Telegram</em></div>
+<a class="btn" id="tg" href="${url}" target="_blank" rel="noopener">Получить полный прогноз + подарок</a>
+<div class="gift">🎁 В подарок: чек-лист «Карта земельных возможностей: 7 способов работать с землёй»</div>`);
+document.getElementById('tg').addEventListener('click',()=>{sfx.ok();vib(40)})}
+/* magic sky */
+const c=document.getElementById('sky'),x=c.getContext('2d');let W,H,st=[],sh=null;
+function rs(){W=c.width=innerWidth;H=c.height=innerHeight;st=Array.from({length:100},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.3,p:Math.random()*6}))}
+addEventListener('resize',rs);rs();
+function draw(t){x.clearRect(0,0,W,H);st.forEach((s,i)=>{const a=.35+.65*Math.abs(Math.sin(t/1200+s.p));x.fillStyle='rgba(255,226,120,'+a+')';x.beginPath();x.arc(s.x,s.y,s.r,0,7);x.fill();if(i%6===0&&st[i+1]){x.strokeStyle='rgba(255,213,0,.13)';x.lineWidth=1;x.beginPath();x.moveTo(s.x,s.y);x.lineTo(st[i+1].x,st[i+1].y);x.stroke()}});
+if(!sh&&Math.random()<.004)sh={x:Math.random()*W*.8+W*.2,y:Math.random()*H*.35,l:0};
+if(sh){sh.x-=9;sh.y+=4.5;sh.l++;const g=x.createLinearGradient(sh.x,sh.y,sh.x+70,sh.y-35);g.addColorStop(0,'rgba(255,240,170,.9)');g.addColorStop(1,'rgba(255,213,0,0)');x.strokeStyle=g;x.lineWidth=2;x.beginPath();x.moveTo(sh.x,sh.y);x.lineTo(sh.x+70,sh.y-35);x.stroke();if(sh.l>70)sh=null}
+requestAnimationFrame(draw)}
+requestAnimationFrame(draw);
+intro();
+</script>
+</body>
+</html>
