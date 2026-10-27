@@ -14,3 +14,4 @@
 
 ## Публикация
 Settings → Pages → Source: GitHub Actions. После push в `main` сайт опубликуется автоматически.
+    Site deployment
