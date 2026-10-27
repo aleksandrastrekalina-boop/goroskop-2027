@@ -122,10 +122,48 @@ const S={sign:null,a:{},xp:0};
 const stage=document.getElementById('stage'),say=document.getElementById('say'),ch=document.getElementById('char'),mouth=document.getElementById('mouth');
 let tw,AC,sound=true;
 /* sound + vibration */
-function tone(f,d=.12,t=0,type='sine',v=.07){if(!sound)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;o.connect(g);g.connect(AC.destination);const s=AC.currentTime+t;g.gain.setValueAtTime(v,s);g.gain.exponentialRampToValueAtTime(.0001,s+d);o.start(s);o.stop(s+d)}catch(e){}}
+async function ensureAudio(){
+  if(!sound)return null;
+  try{
+    const AudioCtx=window.AudioContext||window.webkitAudioContext;
+    if(!AudioCtx)return null;
+    AC=AC||new AudioCtx();
+    if(AC.state==='suspended')await AC.resume();
+    return AC;
+  }catch(e){return null}
+}
+function tone(f,d=.12,t=0,type='sine',v=.07){
+  if(!sound)return;
+  ensureAudio().then(ctx=>{
+    if(!ctx)return;
+    try{
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.type=type;o.frequency.value=f;o.connect(g);g.connect(ctx.destination);
+      const s=ctx.currentTime+t;
+      g.gain.setValueAtTime(v,s);
+      g.gain.exponentialRampToValueAtTime(.0001,s+d);
+      o.start(s);o.stop(s+d);
+    }catch(e){}
+  });
+}
 const sfx={tap:()=>tone(660,.08),ok:()=>[523,659,784,1047].forEach((f,i)=>tone(f,.16,i*.09)),sad:()=>[392,330,262].forEach((f,i)=>tone(f,.28,i*.2,'triangle')),tick:()=>tone(880,.05,0,'square',.03)};
 function vib(p){try{if(sound&&navigator.vibrate)navigator.vibrate(p)}catch(e){}}
-document.getElementById('snd').onclick=e=>{sound=!sound;e.target.textContent=sound?'🔊':'🔇'};
+
+/* Browsers (especially Safari/iOS) block Web Audio until a real user gesture.
+   Unlock it on the first interaction so all later game sounds work reliably. */
+const unlockAudio=()=>{ensureAudio();};
+document.addEventListener('pointerdown',unlockAudio,{once:true,capture:true});
+document.addEventListener('touchstart',unlockAudio,{once:true,capture:true,passive:true});
+document.addEventListener('keydown',unlockAudio,{once:true,capture:true});
+
+document.getElementById('snd').onclick=async e=>{
+  sound=!sound;
+  e.target.textContent=sound?'🔊':'🔇';
+  if(sound){
+    await ensureAudio();
+    tone(740,.1);
+  }
+};
 function mood(m){ch.dataset.mood=m;mouth.setAttribute('d',MOUTH[m]);mouth.setAttribute('fill',m==='joy'?'#c0392b':'none')}
 function speak(t){clearInterval(tw);say.textContent='';let i=0;tw=setInterval(()=>{say.textContent=t.slice(0,++i);if(i>=t.length)clearInterval(tw)},22)}
 function addXP(n){S.xp+=n;document.getElementById('xp').style.width=Math.min(100,S.xp/1.2)+'%';document.getElementById('xpt').textContent=S.xp+' XP';document.getElementById('lvl').textContent='Уровень '+(S.xp>=80?4:S.xp>=50?3:S.xp>=20?2:1);ch.classList.remove('jump');void ch.offsetWidth;ch.classList.add('jump')}
